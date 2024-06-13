@@ -16,8 +16,9 @@ import com.reco1l.osu.multiplayer.Multiplayer.isConnected
 import com.reco1l.osu.multiplayer.Multiplayer.isRoomHost
 import com.reco1l.osu.multiplayer.Multiplayer.player
 import com.reco1l.osu.multiplayer.Multiplayer.room
-import com.reco1l.osu.ui.BeatmapButton
-import com.reco1l.osu.ui.ComposedText
+import com.reco1l.osu.ui.MessageDialog
+import com.reco1l.osu.ui.entity.BeatmapButton
+import com.reco1l.osu.ui.entity.ComposedText
 import com.reco1l.osu.ui.SettingsFragment
 import com.reco1l.osu.updateThread
 import com.reco1l.toolkt.kotlin.runSafe
@@ -77,16 +78,19 @@ object RoomScene : Scene(), IRoomEventListener, IPlayerEventListener
 
     val chatPreview = ComposedText(0f, 0f, getResources().getFont("smallFont"), 100)
 
-    val leaveDialog = AlertDialog.Builder(getGlobal().mainActivity).apply {
+    val leaveDialog = MessageDialog().apply {
 
         setTitle("Leave room")
         setMessage("Are you sure?")
-        setPositiveButton("Yes") { dialog, _ ->
+        addButton("Yes") {
 
-            dialog.dismiss()
+            it.dismiss()
             back()
         }
-        setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+
+        addButton("No") {
+            it.dismiss()
+        }
 
     }
 
@@ -611,7 +615,7 @@ object RoomScene : Scene(), IRoomEventListener, IPlayerEventListener
         player = null
 
         // Clearing chat
-        chat.log.clear()
+        chat.clear()
         chat.dismiss()
 
         mainThread {
@@ -1089,11 +1093,11 @@ object RoomScene : Scene(), IRoomEventListener, IPlayerEventListener
 
             back()
             mainThread {
-                AlertDialog.Builder(getGlobal().mainActivity).apply {
+                MessageDialog().apply {
 
                     setTitle("Message")
                     setMessage("You've been kicked by room host.")
-                    setPositiveButton("Close") { dialog, _ -> dialog.dismiss() }
+                    addButton("Close") { it.dismiss() }
 
                 }.show()
             }
