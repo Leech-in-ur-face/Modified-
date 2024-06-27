@@ -5,12 +5,12 @@ public enum GameMod {
      * Temporarily unranked mods (until adjusted):
      * sd, pf, sc, re, fl
      */
-    MOD_NOFAIL("nf", 0.5f),
+    MOD_NOFAIL("nf", 1.5f),
     MOD_AUTO("auto", 1, true),
     MOD_EASY("es", 0.5f),
-    MOD_HARDROCK("hr", 1.06f),
-    MOD_HIDDEN("hd", 1.06f),
-    MOD_RELAX("relax", 0.001f, true),
+    MOD_HARDROCK("hr", 1.2f),
+    MOD_HIDDEN("hd", 1.16f),
+    MOD_RELAX("relax", 1f),
     MOD_AUTOPILOT("ap", 0.001f, true),
     MOD_DOUBLETIME("dt", 1.12f),
     MOD_NIGHTCORE("nc", 1.12f),
